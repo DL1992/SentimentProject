@@ -3,7 +3,7 @@ import tarfile
 from contextlib import closing
 from urllib.request import urlopen
 from sklearn.datasets import load_files
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 
 
 def download_data_from_url():
@@ -22,7 +22,7 @@ def download_data_from_url():
 
         print("Decompressing %s" % ARCHIVE_NAME)
         with closing(tarfile.open(ARCHIVE_NAME, "r:gz")) as archive:
-            archive.extractall(path='.')
+            archive.extractall(path='')
         os.remove(ARCHIVE_NAME)
 
 
@@ -32,5 +32,5 @@ def load_movie_review_data(dataset_path):
 
 
 if __name__ == '__main__':
-    dataset = load_movie_review_data(r'C:\School\workspace\SentimentProject\Data')
+    dataset = load_movie_review_data(r'/Data')
     print("n_samples: %d" % len(dataset.data))

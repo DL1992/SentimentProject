@@ -1,11 +1,10 @@
 from sklearn import metrics
-from algorithm.data_loader import load_movie_review_data
-# from sklearn.svm import LinearSVC
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 from joblib import dump, load
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from src.algorithm.data_loader import load_movie_review_data
+from sklearn.model_selection import GridSearchCV, train_test_split
 
 
 def print_classification_report(pred_y, test_y, target_names):
@@ -51,9 +50,7 @@ if __name__ == '__main__':
         data.data, data.target, test_size=0.25, random_state=None)
 
     model = SentimentModel()
-    model.load_model(r'C:\School\workspace\SentimentProject\algorithm\my_model.joblib')
-
-    print(model.predict(['this is bad']))
+    # model.load_model(r'C:\School\workspace\SentimentProject\src\algorithm\my_model.joblib')
 
     parameters = {
         'tfidf__ngram_range': [(1, 1), (1, 2)],
@@ -68,8 +65,8 @@ if __name__ == '__main__':
             f'mean-{model.clf_pipeline.cv_results_["mean_test_score"][i]}, '
             f'std-{model.clf_pipeline.cv_results_["std_test_score"][i]}')
 
-    y_predicted = model.predict_proba(docs_test)
-    # print_classification_report(y_predicted, y_test, data.target_names)
+    y_predicted = model.predict(docs_test)
+    print_classification_report(y_predicted, y_test, data.target_names)
     model.save_model('my_model')
 
     # print(model.predict_proba(['this is very bad. worst ever']))
