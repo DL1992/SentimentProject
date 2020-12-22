@@ -32,5 +32,5 @@ def load_movie_review_data(dataset_path):
 
 
 if __name__ == '__main__':
-    dataset = load_movie_review_data(r'/Data')
+    dataset = load_movie_review_data(r'C:\School\workspace\SentimentProject\Data')
     print("n_samples: %d" % len(dataset.data))

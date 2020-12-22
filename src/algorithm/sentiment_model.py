@@ -50,23 +50,22 @@ if __name__ == '__main__':
         data.data, data.target, test_size=0.25, random_state=None)
 
     model = SentimentModel()
-    # model.load_model(r'C:\School\workspace\SentimentProject\src\algorithm\my_model.joblib')
-
-    parameters = {
-        'tfidf__ngram_range': [(1, 1), (1, 2)],
-    }
-
-    model.fit_grid_search(docs_train, y_train, parameters)
-
-    n_candidates = len(model.clf_pipeline.cv_results_['params'])
-    for i in range(n_candidates):
-        print(
-            f'{i}, params - {model.clf_pipeline.cv_results_["params"][i]}; '
-            f'mean-{model.clf_pipeline.cv_results_["mean_test_score"][i]}, '
-            f'std-{model.clf_pipeline.cv_results_["std_test_score"][i]}')
-
-    y_predicted = model.predict(docs_test)
-    print_classification_report(y_predicted, y_test, data.target_names)
-    model.save_model('my_model')
+    #
+    # parameters = {
+    #     'tfidf__ngram_range': [(1, 1), (1, 2)],
+    # }
+    #
+    # model.fit_grid_search(docs_train, y_train, parameters)
+    #
+    # n_candidates = len(model.clf_pipeline.cv_results_['params'])
+    # for i in range(n_candidates):
+    #     print(
+    #         f'{i}, params - {model.clf_pipeline.cv_results_["params"][i]}; '
+    #         f'mean-{model.clf_pipeline.cv_results_["mean_test_score"][i]}, '
+    #         f'std-{model.clf_pipeline.cv_results_["std_test_score"][i]}')
+    #
+    # y_predicted = model.predict(docs_test)
+    # print_classification_report(y_predicted, y_test, data.target_names)
+    # model.save_model('my_model')
 
     # print(model.predict_proba(['this is very bad. worst ever']))
