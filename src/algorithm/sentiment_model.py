@@ -37,6 +37,11 @@ class SentimentModel:
         predictions_proba = self.clf_pipeline.predict_proba(x_test)
         return predictions_proba
 
+    def predict_sentiment(self, x_test):
+        pred = self.predict_proba(x_test)
+        sentiment = 'good' if (pred.argmax() == 0) else 'bad'
+        return {sentiment: pred.max()}
+
     def save_model(self, file_path):
         dump(self.clf_pipeline, file_path)
 
@@ -50,6 +55,9 @@ if __name__ == '__main__':
         data.data, data.target, test_size=0.25, random_state=None)
 
     model = SentimentModel()
+    model.load_model(r'C:\School\workspace\SentimentProject\src\algorithm\my_model.joblib')
+    print(model.predict_sentiment(['this is the worst movies ever']))
+
     #
     # parameters = {
     #     'tfidf__ngram_range': [(1, 1), (1, 2)],
