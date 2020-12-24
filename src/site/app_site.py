@@ -5,14 +5,13 @@ BASE = "http://127.0.0.1:5000/"
 
 
 def get_review_sentiment(movie_review):
-    st.write('The Entered movie review is ', movie_review)
     with st.spinner('The model is calculating the sentiment'):
-        response = requests.put(BASE + 'Review', {movie_review})
+        response = requests.put(BASE + 'Review', {"review": movie_review}).json()
     st.text("The sentiment of the review is:")
-    if response[0] == 'good':
-        st.success(f'{response[0]} with a confidence of{response[1]}')
+    if response['sentiment'] == 'good':
+        st.success(f'{response["sentiment"]} with a confidence of {response["confidence"]}')
     else:
-        st.error(f'{response[0]} with a confidence of{response[1]}')
+        st.error(f'{response["sentiment"]} with a confidence of {response["confidence"]}')
 
 
 def start_site():

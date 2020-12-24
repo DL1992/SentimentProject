@@ -27,8 +27,8 @@ class MovieReview(Resource):
     def put(self):
         args = reviews_put_args.parse_args()
         review = [args['review']]
-        result = model.predict_proba(review)
-        return {"good": result[0][0], 'bad': result[0][1]}
+        result = model.predict_sentiment(review)
+        return result
 
 
 if __name__ == '__main__':
